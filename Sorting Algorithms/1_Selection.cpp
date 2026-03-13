@@ -1,27 +1,24 @@
 #include<iostream>
 using namespace std;
 
-//Swap two numbers (Passed by reference - Mandatory)
-void swap(int &x,int &y)
-{
-    int temp;
-    temp=x;
-    x=y;
-    y=temp;
-}
-
 //Selection Sort Algorithm
-void selectionsort(int array[],int size)
+void selectionsort(int array[],int n)
 {
-    for(int i=0;i<size-1;i++)
+    for(int i=0;i<n-1;i++)
     {
-        for(int j=i+1;j<size;j++)
+        int minIndex=i;
+        for(int j=i+1;j<n;j++)
         {
-            if(array[i]>array[j])
+            if(array[j]<array[minIndex])
             {
-                swap(array[i],array[j]);
+                minIndex=j;
             }
         }
+
+        //SWAP 
+        int temp=array[i];
+        array[i]=array[minIndex];
+        array[minIndex]=temp;
     }
 }
 
@@ -44,5 +41,6 @@ int main()
         cout<<array[i]<<"   ";
      }
 
+     delete[] array;
      return 0;
 }
