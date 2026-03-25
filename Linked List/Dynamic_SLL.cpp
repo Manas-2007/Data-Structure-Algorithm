@@ -1,4 +1,4 @@
-//Write a program to take input from the user on runtime of the progrm via singly linked list.
+//Write a program to take input from the user on runtime of the program via singly linked list.
 
 #include<iostream>
 using namespace std;
@@ -20,7 +20,7 @@ int main()
     cin>>size;
     for(int i=0;i<size;i++)
     {
-        cout<<"DATA OAT NODE "<<i+1<<" : ";
+        cout<<"DATA AT NODE "<<i+1<<" : ";
         cin>>value;
         Node *newnode=new Node(value);
         if(head==NULL)
