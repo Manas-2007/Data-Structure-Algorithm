@@ -142,6 +142,22 @@ class Node{
          }
     }
 
+    //Reverse a linked list
+    void Reverse(Node *&head)
+    {
+        Node *ptr=head;
+        //Reaching to the last node
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        //Traversing back to front via previous pointer
+        while(ptr!=NULL)
+        {
+            cout<<ptr->data<<"   ";
+            ptr=ptr->prev;
+        }
+    }
 
 
 
@@ -154,10 +170,7 @@ int main()
     createList(head,size);
     cout<<"\n           YOUR DATA SHOWN BELOW\n";
     Traversal(head);
-    cout<<"\n           DATA  DELETION AT Nth Node\n";
-    cout<<"\nEnter the Node that want to delete : ";
-    cin>>position;
-    positionDelete(head,position);
-    Traversal(head);
+    cout<<"\n           Reversing the Linked List\n";
+    Reverse(head);
     return 0;
 }
