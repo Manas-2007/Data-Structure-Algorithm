@@ -134,7 +134,5 @@ int main()
     insertnode(head,position);
     show(head);
 
-    return 0;
-   
-    
+    return 0;    
 }
