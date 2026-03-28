@@ -1,11 +1,12 @@
-//Write a program to find the smallest element from the stack with time complexity O(n).....
+//Write a program to find the smallest element in the stack having time complexity O(1)...............
 #include<iostream>
+#include<climits>
 using namespace std;
 class Stack{
+    public:
     int *array;
     int size;
     int top;
-    public:
     Stack(int capacity)
     {
         size=capacity;
@@ -13,67 +14,103 @@ class Stack{
         array=new int[size];
     }
 
-    void push(int data)
+    //Original Stack
+    void mainpush(int data)
     {
         if(top==size-1)
         {
-            cout<<"\nStack Overflow.....\n";
+            cout<<"\nStack Overflow...\n";
         }
         else
         {
             top++;
             array[top]=data;
-         }
-    }
-
-    void pop()
-    {
-        if(top==-1)
-        {
-            cout<<"\nStack Underflow.....\n";
-        }
-        else
-        {
-            top--;
         }
     }
 
-    int min()
+    //minpush
+    void minpush(int data)
     {
-        int min=array[top];
-        int localtop=top;
-        for(int i=localtop;i>=0;i--)
-        {
-            if(min>=array[i])
+        
+            if(top==-1)
             {
-                min=array[i];
+                top++;
+                array[top]=data;
             }
+            else
+        {
+                top++;
+                if(data<array[top-1])
+                {
+                    array[top]=data;
+                }
+                else
+                {
+                    array[top]=array[top-1];
+                }
         }
-        return min;
     }
-
+    
+    //Min value
+    void min()
+    {
+        cout<<"The min value in the Stack is "<<array[top]<<"\n";
+    }
+   
+    //Display
     void display()
     {
         for(int i=0;i<=top;i++)
         {
-            cout<<array[i]<<"  ";
+            cout<<array[i]<<"   ";
         }
+        cout<<"\n";
     }
+    
 };
+//pop logic
+    void pop(Stack &a,Stack &b)
+    {
+        a.top--;
+        b.top--;
+    }
+
+    //size of the stack
+    void Size(Stack &a,Stack &b)
+    {
+        cout<<"\nSIZE OF STACK 1 : "<<a.top+1;
+        cout<<"\nSIZE OF STACK 2 : "<<b.top+1<<"\n";
+    }
 
 int main()
 {
     int size;
-    cout<<"Enter the size of the stack : ";
+    cout<<"Enter the size of the Stack : ";
     cin>>size;
-    Stack s(size);
-    s.push(25);
-    s.push(56);
-    s.push(34);
-    s.push(100);
-    s.push(67);
-    s.push(6);
-    s.display();
-    cout<<"\nThe min element in the stack is : "<<s.min()<<endl;
-}
+    Stack s1(size),s2(size);
+    s1.mainpush(56);
+    s2.minpush(56);
 
+    s1.mainpush(67);
+    s2.minpush(67);
+
+    s1.mainpush(7);
+    s2.minpush(7);
+
+    s1.mainpush(100);
+    s2.minpush(100);
+
+    s1.mainpush(89);
+    s2.minpush(89);
+
+    Size(s1,s2);
+    pop(s1,s2);
+    Size(s1,s2);
+
+      s1.display();
+      s2.min();
+      Size(s1,s2);
+      
+    return 0;
+
+}
