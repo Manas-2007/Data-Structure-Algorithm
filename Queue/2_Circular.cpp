@@ -2,6 +2,15 @@
 #include<iostream>
 #include<cstdlib>
 using namespace std;
+//Clear screen
+void  Clear()
+{
+    cout<<"\n       Press Enter to Continue:........";
+    cin.ignore();
+    cin.get();
+    system("cls");
+}
+
 class Queue{
     int *array;
     int size,front,rear;
@@ -24,8 +33,8 @@ class Queue{
 
         if(front==-1)
         {
-            front++;
-            rear++;
+            front=0;
+            rear=0;
             array[rear]=data;
         }
         else if(front==(rear+1)%size)
@@ -33,7 +42,7 @@ class Queue{
             cout<<"\nQueue Overflow......\n";
         }
         else{
-            rear++;
+            rear=(rear+1)%size;
             array[rear]=data;
         }
     }
@@ -47,11 +56,11 @@ class Queue{
         }
         else
         { 
-            if(rear!=(front+1)%size)
+            if(front!=rear)
                 {
                     int value=array[front];
                     cout<<"\nRemoved "<<value<<" from the Queue\n";
-                    front++;
+                   front= (front+1)%size;
                 }
                 else
                 {
@@ -65,11 +74,23 @@ class Queue{
     //Display data
     void show()
     {
-        for(int i=front;i<=rear;i++)
+        if(front==-1)
         {
-            cout<<array[i]<<"  ";
+            cout<<"\nQueue is Empty\n";
         }
-        cout<<"\n";
+        
+        int i=front;
+        while(true)
+        {
+            if(i==rear)
+            {
+                cout<<array[i]<<"  ";
+                break;
+            }
+            cout<<array[i]<<"  ";
+            i=(i+1)%size;
+        }
+        
     }
 };
 
@@ -88,14 +109,17 @@ int main()
         {
             case 1:
             s.push();
+            Clear();
             break;
 
             case 2:
             s.pop();
+            Clear();
             break;
 
             case 3:
             s.show();
+            Clear();
             break;
 
             case 4:
