@@ -1,46 +1,42 @@
 #include<iostream>
 using namespace std;
-
-//Selection Sort Algorithm
-void selectionsort(int array[],int n)
+//Selection sort Function
+void SelectionSort(int *array,int size)
 {
-    for(int i=0;i<n-1;i++)
+    for(int i=0;i<size;i++)
     {
-        int minIndex=i;
-        for(int j=i+1;j<n;j++)
+        int minValue=i;
+        for(int j=i+1;j<size;j++)
         {
-            if(array[j]<array[minIndex])
+            if(array[j]<array[minValue])
             {
-                minIndex=j;
+                minValue=j;
             }
         }
-
-        //SWAP 
-        int temp=array[i];
-        array[i]=array[minIndex];
-        array[minIndex]=temp;
+        //Swap
+        int temp=array[minValue];
+        array[minValue]=array[i];
+        array[i]=temp;
     }
 }
-
 int main()
 {
-    int *array,size;
-    cout<<"Enter the size of array : ";
+    int size;
+    cout<<"Enter the size of the Array :  ";
     cin>>size;
-    array=new int[size];
-    cout<<"Enter "<<size<<" elements in the array\n";
+    int *data;
+    data=new int[size];
+    //Input data
+    cout<<"Enter the data into Array : \n";
     for(int i=0;i<size;i++)
-     {
-         cin>>array[i];
-     }
-     cout<<"\n\nData after sorting :\n";
-     selectionsort(array,size);
-
-     for(int i=0;i<size;i++)
-     {
-        cout<<array[i]<<"   ";
-     }
-
-     delete[] array;
-     return 0;
+    {
+        cin>>data[i];
+    }
+    cout<<"Your Sorted Data : ";
+    SelectionSort(data,size);
+    for(int i=0;i<size;i++)
+    {
+        cout<<data[i]<<" ";
+    }
+    return 0;
 }
