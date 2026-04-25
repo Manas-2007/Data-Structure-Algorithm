@@ -1,28 +1,38 @@
 #include<iostream>
 using namespace std;
 
-//Insertion sort algorithm
-void insertionSort(int array[],int size)
+//Insertion Sort
+void InsertionSort(int *arr,int size)
 {
-    for(int i=1;i<=size-1;i++)
+    int curr,prev;
+    for(int i=1;i<size;i++)
     {
-        int key=array[i];
-        int j=i-1;
-            while(j>=0 && array[j]>key)
-            {
-                array[j+1]=array[j];
-                j--;
-            }
-            array[j+1]=key;
+        curr=arr[i];
+        prev=i-1;
+        while(prev>=0 && arr[prev]>curr)
+        {
+            arr[prev+1]=arr[prev];
+            prev--;
+        }
+        arr[prev+1]=curr;
     }
 }
 int main()
 {
-    int array[7]={10,67,34,20,60,23,22};
-    insertionSort(array,7);
-    for(int i=0;i<7;i++)
+    int size;
+    cout<<"Enter the size of the array : ";
+    cin>>size;
+    int *array=new int[size];
+    cout<<"Enter data in array :-\n";
+    for(int i=0;i<size;i++)
     {
-        cout<<array[i]<<"  ";
+        cin>>array[i];
+    }
+    cout<<"Your Sorted data : ";
+    InsertionSort(array,size);
+    for(int i=0;i<size;i++)
+    {
+        cout<<array[i]<<" ";
     }
     return 0;
 }
