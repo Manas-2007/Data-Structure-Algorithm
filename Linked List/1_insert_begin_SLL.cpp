@@ -114,6 +114,17 @@ void EndInsert(Node*&head,int value)
    }
 }
 
+//Length of SLL
+void LengthList(Node*&head)
+{
+   int count=0;
+   Node*ptr=head;
+   while(ptr!=NULL)
+   {
+      ptr=ptr->next;
+   }
+   cout<<"\nTotal Nodes : "<<count<<endl;
+}
 int main()
 {
    Node *head=NULL;
@@ -129,5 +140,6 @@ int main()
    cin>>data;
    EndInsert(head,data);
    Traversal(head);
+   LengthList(head);
    return 0;
 }

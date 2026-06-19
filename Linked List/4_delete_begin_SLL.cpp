@@ -1,52 +1,108 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class Node{
-    public:
+class Node
+{
+public:
     int data;
     Node *next;
-    //Constructor
     Node(int data)
     {
-        this->data=data;
-        next=NULL;
+        this->data = data;
+        next = NULL;
     }
 };
+// Traversal
+void Traversal(Node *&head)
+{
+    Node *ptr = head;
+    while (ptr != NULL)
+    {
+        cout << ptr->data << " ";
+        ptr = ptr->next;
+    }
+}
+
+// Creating List
+void CreateList(Node *&head, int size)
+{
+    Node *ptr = head;
+    int data;
+    for (int i = 1; i <= size; i++)
+    {
+        cout << "Data of Node " << i << " : ";
+        cin >> data;
+        Node *newnode = new Node(data);
+        if (head == NULL)
+        {
+            head = newnode;
+            ptr = head;
+        }
+        else
+        {
+            ptr->next = newnode;
+            ptr = ptr->next;
+        }
+    }
+}
+
+// Remove First Node
+void RemoveFirst(Node *&head)
+{
+    Node *ptr = head;
+    head = head->next;
+    delete ptr;
+    cout << "\n";
+}
+
+// Remove Last Node
+void LastRemove(Node *&head)
+{
+    Node *ptr = head;
+    Node *prev = NULL;
+    while (ptr->next != NULL)
+    {
+        prev = ptr;
+        ptr = ptr->next;
+    }
+    delete ptr;
+    prev->next = NULL;
+    cout << "\n";
+}
+
+// Remove Any Middle Node
+void deleteNode(Node *&head, int pos)
+{
+    Node *ptr = head;
+    Node *prev = NULL;
+    if (pos == 1)
+    {
+        ptr = head;
+        head = head->next;
+        delete ptr;
+    }
+    else
+    {
+        for (int i = 1; i < pos; i++)
+        {
+            prev = ptr;
+            ptr = ptr->next;
+        }
+        prev->next = ptr->next;
+        delete ptr;
+    }
+}
+
 int main()
 {
-    Node *n1,*n2,*n3,*n4,*n5,*head=NULL,*ptr;
-    n1=new Node(100);
-    n2=new Node(200);
-    n3=new Node(300);
-    n4=new Node(400);
-    n5=new Node(500);
-
-    head=n1;
-    n1->next=n2;
-    n2->next=n3;
-    n3->next=n4;
-    n4->next=n5;
-    n5->next=NULL;
-
-    //Traversing
-     ptr=head;
-     cout<<"            ORIGINAL LINKED LIST\n";
-     while(ptr!=NULL)
-     {
-        cout<<ptr->data<<"   ";
-        ptr=ptr->next;
-     }
-
-     cout<<"\n          AFTER DELETING THE FIRST NODE\n";
-     ptr=head;
-     head=ptr->next;
-     delete ptr;
-
-     ptr=head;
-     while(ptr!=NULL)
-     {
-        cout<<ptr->data<<"   ";
-        ptr=ptr->next;
-     }
-     
-     return 0;
+    Node *head = NULL;
+    int size, pos;
+    cout << "TOTAL NODES : ";
+    cin >> size;
+    CreateList(head, size);
+    Traversal(head);
+    cout << "\nEnter position : ";
+    cin >> pos;
+    deleteNode(head, pos);
+    Traversal(head);
+    return 0;
 }
