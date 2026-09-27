@@ -1,36 +1,50 @@
 #include<iostream>
 using namespace std;
-//Bubble Sort Function
-void BubbleSort(int *array,int size)
+
+void Bubble_Sort(int *array,int size)
 {
-    for(int i=0;i<size-1;i++)
+    bool isSwap=false;
+    for(int i=0;i<size;i++)
     {
         for(int j=0;j<size-i-1;j++)
         {
             if(array[j]>array[j+1])
             {
+                isSwap=true;
                 int temp=array[j];
                 array[j]=array[j+1];
                 array[j+1]=temp;
             }
         }
+
+        if(!isSwap)
+        {
+            cout<<"\n========ALREADY SORTED ARRAY============\n";
+            break;
+        }
     }
 }
+
 int main()
 {
+    
     int size;
-    cout<<"Enter the size of array : ";
+    cout<<"Enter the size of the array : ";
     cin>>size;
+
     int *data=new int[size];
-    cout<<"Enter your data :\n";
+    cout<<"Enter "<<size<<" elements into array : \n";
     for(int i=0;i<size;i++)
     {
+        cout<<"Data "<<i+1<<" : ";
         cin>>data[i];
     }
-    BubbleSort(data,size);
+    cout<<"\n===========AFTER SORTING===============\n";
+    Bubble_Sort(data,size);
     for(int i=0;i<size;i++)
     {
         cout<<data[i]<<" ";
     }
-    return 0;    
+
+    return 0;
 }

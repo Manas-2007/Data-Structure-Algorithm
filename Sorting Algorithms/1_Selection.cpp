@@ -1,42 +1,43 @@
 #include<iostream>
 using namespace std;
-//Selection sort Function
-void SelectionSort(int *array,int size)
+
+void Selection_Sort(int *array,int size)
 {
     for(int i=0;i<size;i++)
     {
-        int minValue=i;
+        int minIdx=i;
         for(int j=i+1;j<size;j++)
         {
-            if(array[j]<array[minValue])
+            if(array[j]<array[minIdx])
             {
-                minValue=j;
+                minIdx=j;
             }
         }
-        //Swap
-        int temp=array[minValue];
-        array[minValue]=array[i];
-        array[i]=temp;
+        int temp=array[i];
+        array[i]=array[minIdx];
+        array[minIdx]=temp;
     }
 }
+
 int main()
 {
     int size;
-    cout<<"Enter the size of the Array :  ";
+    cout<<"Enter the size of the array : ";
     cin>>size;
-    int *data;
-    data=new int[size];
-    //Input data
-    cout<<"Enter the data into Array : \n";
+
+    int *data=new int[size];
+    cout<<"Enter "<<size<<" elements in array : \n";
     for(int i=0;i<size;i++)
     {
+        cout<<"Data "<<i+1<<" : ";
         cin>>data[i];
     }
-    cout<<"Your Sorted Data : ";
-    SelectionSort(data,size);
+    cout<<"\n============AFTER SORTING===============\n";
+    Selection_Sort(data,size);
     for(int i=0;i<size;i++)
     {
         cout<<data[i]<<" ";
     }
+
     return 0;
 }
