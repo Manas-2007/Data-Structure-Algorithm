@@ -1,47 +1,57 @@
 #include<iostream>
 using namespace std;
 
-int Partition(int arr[],int low,int high)
+int partition(int *array,int start,int end)
 {
-    int pivot=arr[high];
-    int i=low-1;
-    for(int j=low;j<high;j++)
+    int pivot=array[end];
+    int j=start-1;
+    for(int i=start;i<end;i++)
     {
-        if(arr[j]<pivot)
+        if(array[i]<=pivot)
         {
-            i++;
-            swap(arr[i],arr[j]);
+            j++;
+            int temp=array[i];
+            array[i]=array[j];
+            array[j]=temp;
         }
     }
-    swap(arr[i+1],arr[high]);
-    return i+1;
+    int temp=array[j+1];
+        array[j+1]=array[end];
+        array[end]=temp;
+        
+        return j+1;
 }
 
-void Quicksort(int arr[],int low,int high){
-    if(low<high)
+void Quick_Sort(int *array,int start,int end)
+{
+    if(start<end)
     {
-        int pi=Partition(arr,low,high);
-        Quicksort(arr,low,pi-1);
-        Quicksort(arr,pi+1,high);
+        int pi=partition(array,start,end);
+        Quick_Sort(array,start,pi-1);
+        Quick_Sort(array,pi+1,end);
+        
     }
 }
 
 int main()
 {
-    int *array,size;
-    cout<<"Enter the size of array : ";
+    int size;
+    cout<<"Enter the size of the array : ";
     cin>>size;
-    array=new int[size];
+    int *data=new int[size];
     cout<<"Enter "<<size<<" elements in the array : \n";
     for(int i=0;i<size;i++)
     {
-        cin>>array[i];
+        cout<<"Data "<<i+1<<" : ";
+        cin>>data[i];
     }
-    cout<<"YOUR ELEMENTS AFTER SORTING ARE :\n";
-    Quicksort(array,0,size);
+
+    cout<<"\n==============AFTER SORTING=======================\n";
+    Quick_Sort(data,0,size-1);
     for(int i=0;i<size;i++)
     {
-       cout<<array[i]<<"   ";
+        cout<<data[i]<<" ";
     }
+
     return 0;
 }
