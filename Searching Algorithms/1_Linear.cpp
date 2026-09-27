@@ -1,47 +1,41 @@
 #include<iostream>
 using namespace std;
-int main()
-{
-    int size,find,position;
-    bool isfound=false;
-    int *array;
-     cout<<"Enter the size of your Array : ";
-    cin>>size;
-    array=new int [size];
-   
-    cout<<"\n       ENTER ELEMENTS INTO ARRAY\n";
-    for(int i=0;i<size;i++)
-    {
-        cin>>array[i];
-    }
-    cout<<"\n       YOUR ARRAY ELEMENTS ARE LISTED BELOW\n";
-    for(int i=0;i<size;i++)
-    {
-        cout<<array[i]<<"    ";
-    }
 
-    cout<<"\n\nENTER THE ELEMENT THAT YOU WANT TO FIND : ";
-    cin>>find;
-    
-    //Linear Search Algorithm
+int Linear_Search(int *array,int size,int target)
+{
+    bool isFound=false;
+    int index;
     for(int i=0;i<size;i++)
     {
-        if(array[i]==find)
+        if(array[i]==target)
         {
-            isfound=true;
-            position=i;
+            isFound=true;
+            index=i;
             break;
         }
     }
-    if(isfound)
+    if(isFound)
     {
-        cout<<"\nELEMENT AVAILABLE AT INDEX "<<position<<"\n\n";
+        return index;
     }
     else
     {
-        cout<<"\nELEMENT NOT FOUND\n";
+        return -1;
+    }
+}
+
+int main()
+{
+    int array[5]={10,20,40,3,90};
+    int result=Linear_Search(array,5,200);
+    if(result!=-1)
+    {
+       cout<<"Element is available at index "<<result;
+    }
+    else{
+        cout<<"DATA NOT FOUND.....";
     }
 
     return 0;
-
+    
 }
